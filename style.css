@@ -1,0 +1,576 @@
+/* ----- Общее ----- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.app {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    height: fit-content;
+    transition: all 0.3s ease;
+}
+
+/* ----- Шапка ----- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 28px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-export,
+.btn-import {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-export {
+    background: #10b981;
+    color: white;
+}
+
+.btn-export:hover {
+    background: #059669;
+    transform: scale(1.05);
+}
+
+.btn-import {
+    background: #8b5cf6;
+    color: white;
+}
+
+.btn-import:hover {
+    background: #7c3aed;
+    transform: scale(1.05);
+}
+
+/* ----- Поиск и фильтры ----- */
+.search-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-filter input,
+.search-filter select {
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+    background: white;
+    flex: 1;
+    min-width: 120px;
+}
+
+.search-filter input:focus,
+.search-filter select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-filter select {
+    flex: 0.5;
+    min-width: 140px;
+    cursor: pointer;
+}
+
+/* ----- Вкладки ----- */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #e9edf2;
+    color: #475569;
+    transition: all 0.25s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tab-btn.active {
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+}
+
+.tab-btn:hover:not(.active) {
+    background: #d1d9e6;
+    transform: translateY(-2px);
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.tab-btn.active .badge {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ----- Форма добавления ----- */
+.add-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.add-form input,
+.add-form select {
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+    background: white;
+}
+
+.add-form input {
+    flex: 2;
+}
+
+.add-form input:focus,
+.add-form select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.add-form select {
+    flex: 0.7;
+    cursor: pointer;
+}
+
+.add-form button {
+    padding: 12px 28px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.add-form button:hover {
+    background: #2563eb;
+    transform: scale(1.03);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+.add-form button:active {
+    transform: scale(0.97);
+}
+
+/* ----- Список задач ----- */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    min-height: 100px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1px solid #eef2f6;
+    transition: all 0.25s;
+    animation: fadeIn 0.3s ease;
+    gap: 12px;
+}
+
+.task-item:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.task-item.done {
+    opacity: 0.7;
+    background: #f1f5f9;
+}
+
+.task-item.done .task-text {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
+
+.task-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.task-text {
+    font-size: 16px;
+    color: #0f172a;
+    word-break: break-word;
+    flex: 1;
+    cursor: pointer;
+    padding: 4px 0;
+}
+
+.task-text:hover {
+    color: #3b82f6;
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.task-category {
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #e2e8f0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.task-date {
+    white-space: nowrap;
+}
+
+.task-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.task-actions button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.task-actions button:hover {
+    transform: scale(1.08);
+}
+
+.btn-done {
+    background: #22c55e;
+    color: white;
+}
+
+.btn-done:hover {
+    background: #16a34a;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+}
+
+.btn-remove-done {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-remove-done:hover {
+    background: #dc2626;
+}
+
+/* ----- Статистика ----- */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 16px;
+    background: #f1f5f9;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #475569;
+    flex-wrap: wrap;
+}
+
+.stats strong {
+    color: #0f172a;
+    font-size: 16px;
+}
+
+/* ----- Пустое состояние ----- */
+.empty-msg {
+    text-align: center;
+    color: #94a3b8;
+    padding: 50px 0;
+    font-size: 17px;
+}
+
+/* ----- Модальное окно ----- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+    margin-bottom: 12px;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    border-color: #3b82f6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-save {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #2563eb;
+}
+
+.btn-cancel {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.btn-cancel:hover {
+    background: #cbd5e1;
+}
+
+/* ----- Анимации ----- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ----- Адаптив ----- */
+@media (max-width: 640px) {
+    .app {
+        padding: 16px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-actions {
+        justify-content: stretch;
+    }
+
+    .btn-export,
+    .btn-import {
+        flex: 1;
+        text-align: center;
+    }
+
+    .search-filter {
+        flex-direction: column;
+    }
+
+    .search-filter input,
+    .search-filter select {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .add-form {
+        flex-direction: column;
+    }
+
+    .add-form select {
+        flex: 1;
+    }
+
+    .task-item {
+        flex-wrap: wrap;
+        padding: 12px;
+    }
+
+    .task-meta {
+        flex-wrap: wrap;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .task-actions button {
+        flex: 1;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+/* ----- Скроллбар ----- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

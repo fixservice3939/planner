@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мои планы — Todo List</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- Шапка -->
+        <header class="header">
+            <h1>📋 Мои планы</h1>
+            <div class="header-actions">
+                <button class="btn-export" id="exportBtn">📤 Экспорт</button>
+                <button class="btn-import" id="importBtn">📥 Импорт</button>
+                <input type="file" id="fileInput" accept=".json" style="display:none" />
+            </div>
+        </header>
+
+        <!-- Поиск и фильтры -->
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="🔍 Поиск задач..." />
+            <select id="categoryFilter">
+                <option value="all">Все категории</option>
+                <option value="работа">💼 Работа</option>
+                <option value="личное">❤️ Личное</option>
+                <option value="учеба">📚 Учеба</option>
+                <option value="здоровье">💪 Здоровье</option>
+                <option value="другое">📌 Другое</option>
+            </select>
+            <select id="sortSelect">
+                <option value="newest">Сначала новые</option>
+                <option value="oldest">Сначала старые</option>
+                <option value="alphabet">По алфавиту</option>
+            </select>
+        </div>
+
+        <!-- Вкладки -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="active">📌 Активные <span class="badge" id="activeCount">0</span></button>
+            <button class="tab-btn" data-tab="done">✅ Выполненные <span class="badge" id="doneCount">0</span></button>
+            <button class="tab-btn" data-tab="all">📋 Все задачи <span class="badge" id="allCount">0</span></button>
+        </div>
+
+        <!-- Форма добавления -->
+        <div class="add-form">
+            <input type="text" id="taskInput" placeholder="Что нужно сделать?" maxlength="200" />
+            <select id="categorySelect">
+                <option value="работа">💼 Работа</option>
+                <option value="личное">❤️ Личное</option>
+                <option value="учеба">📚 Учеба</option>
+                <option value="здоровье">💪 Здоровье</option>
+                <option value="другое">📌 Другое</option>
+            </select>
+            <button id="addBtn">➕ Добавить</button>
+        </div>
+
+        <!-- Список задач -->
+        <div id="listContainer">
+            <div class="task-list" id="taskList"></div>
+        </div>
+
+        <!-- Статистика -->
+        <div class="stats" id="stats">
+            <span>Всего: <strong id="totalTasks">0</strong></span>
+            <span>Активных: <strong id="totalActive">0</strong></span>
+            <span>Выполнено: <strong id="totalDone">0</strong></span>
+        </div>
+    </div>
+
+    <!-- Модальное окно для редактирования -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2>✏️ Редактировать задачу</h2>
+            <input type="text" id="editInput" placeholder="Новый текст задачи..." />
+            <select id="editCategory">
+                <option value="работа">💼 Работа</option>
+                <option value="личное">❤️ Личное</option>
+                <option value="учеба">📚 Учеба</option>
+                <option value="здоровье">💪 Здоровье</option>
+                <option value="другое">📌 Другое</option>
+            </select>
+            <div class="modal-actions">
+                <button class="btn-save" id="editSaveBtn">💾 Сохранить</button>
+                <button class="btn-cancel" id="editCancelBtn">❌ Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
